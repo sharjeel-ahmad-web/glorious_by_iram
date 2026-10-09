@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glorious by Iram | Premium Beauty Salon Islamabad</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rosegold: '#d9a5b3',
+                        mocha: '#4a3b32',
+                        pearl: '#fcfbf9',
+                        charcoal: '#2c2c2c',
+                        peach: '#f4c2c2'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(74, 59, 50, 0.08)',
+                        'glow': '0 0 20px rgba(217, 165, 179, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fcfbf9;
+            color: #2c2c2c;
+            cursor: none; /* Hide default cursor for custom one */
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4a3b32;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(217, 165, 179, 0.6);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        .cursor-hover .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(217, 165, 179, 0.1);
+            border-color: #d9a5b3;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(252, 251, 249, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(217, 165, 179, 0.2);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 0.7s ease;
+        }
+        .img-zoom-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Arch Image Shape */
+        .arch-img {
+            border-top-left-radius: 999px;
+            border-top-right-radius: 999px;
+        }
+
+        /* Hide cursor on touch devices */
+        @media (max-width: 768px) {
+            body { cursor: auto; }
+            .cursor-dot, .cursor-outline { display: none; }
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(252, 251, 249, 0.9) 0%, rgba(252, 251, 249, 0.6) 50%, rgba(252, 251, 249, 0.3) 100%);
+        }
+        @media (max-width: 768px) {
+            .hero-overlay {
+                background: linear-gradient(to top, rgba(252, 251, 249, 1) 0%, rgba(252, 251, 249, 0.7) 100%);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-rosegold selection:text-white">
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-serif text-2xl md:text-3xl font-bold text-mocha tracking-wider interactive">
+                        Glorious<span class="text-rosegold font-light text-xl md:text-2xl block -mt-2">by Iram</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-charcoal hover:text-rosegold transition-colors text-sm uppercase tracking-widest interactive">Home</a>
+                    <a href="#about" class="text-charcoal hover:text-rosegold transition-colors text-sm uppercase tracking-widest interactive">About</a>
+                    <a href="#services" class="text-charcoal hover:text-rosegold transition-colors text-sm uppercase tracking-widest interactive">Services</a>
+                    <a href="#bridal" class="text-charcoal hover:text-rosegold transition-colors text-sm uppercase tracking-widest interactive">Bridal</a>
+                    <a href="#testimonials" class="text-charcoal hover:text-rosegold transition-colors text-sm uppercase tracking-widest interactive">Reviews</a>
+                    <a href="#contact" class="bg-mocha text-pearl px-6 py-3 rounded-none hover:bg-rosegold transition-colors duration-300 text-sm uppercase tracking-widest interactive shadow-soft">Book Appointment</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-mocha hover:text-rosegold focus:outline-none p-2 interactive">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-pearl border-t border-rosegold/20 absolute w-full shadow-soft">
+            <div class="px-4 pt-2 pb-6 space-y-1 text-center">
+                <a href="#home" class="block px-3 py-3 text-charcoal hover:text-rosegold uppercase tracking-widest text-sm">Home</a>
+                <a href="#about" class="block px-3 py-3 text-charcoal hover:text-rosegold uppercase tracking-widest text-sm">About</a>
+                <a href="#services" class="block px-3 py-3 text-charcoal hover:text-rosegold uppercase tracking-widest text-sm">Services</a>
+                <a href="#bridal" class="block px-3 py-3 text-charcoal hover:text-rosegold uppercase tracking-widest text-sm">Bridal</a>
+                <a href="#testimonials" class="block px-3 py-3 text-charcoal hover:text-rosegold uppercase tracking-widest text-sm">Reviews</a>
+                <a href="#contact" class="block mt-4 bg-mocha text-pearl px-3 py-3 rounded-none hover:bg-rosegold transition-colors uppercase tracking-widest text-sm">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Luxury Salon Experience" class="w-full h-full object-cover object-right md:object-center">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-2xl reveal">
+                <p class="text-rosegold font-semibold tracking-widest uppercase mb-4 text-sm md:text-base">Your Premium Beauty Destination in Islamabad</p>
+                <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl text-mocha leading-tight mb-6">
+                    Your Beauty.<br>Your Confidence.<br>Your Moment.
+                </h1>
+                <p class="text-charcoal/80 text-lg md:text-xl mb-10 font-light max-w-lg">
+                    Experience luxury beauty care tailored to enhance your natural elegance. Professional styling, exquisite bridal makeup, and rejuvenating treatments.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="bg-mocha text-pearl px-8 py-4 text-center hover:bg-rosegold transition-colors duration-300 uppercase tracking-widest text-sm shadow-soft interactive">
+                        Book Your Appointment
+                    </a>
+                    <a href="#services" class="border border-mocha text-mocha px-8 py-4 text-center hover:bg-mocha hover:text-pearl transition-colors duration-300 uppercase tracking-widest text-sm interactive">
+                        Explore Our Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-pearl py-6 border-b border-rosegold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center gap-4 reveal">
+            <div class="flex space-x-1 text-rosegold text-xl">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p class="text-charcoal font-medium text-lg">
+                <span class="font-bold text-mocha">4.9 / 5</span> (47 Reviews)
+            </p>
+            <span class="hidden md:inline-block text-rosegold">•</span>
+            <p class="text-charcoal/70 font-light italic text-sm md:text-base">Loved by local beauty clients in Islamabad</p>
+        </div>
+    </div>
+
+    <section id="about" class="py-24 bg-pearl relative">
+        <!-- Decorative element -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-peach/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Side -->
+                <div class="reveal img-zoom-container relative">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Stylist at work" class="arch-img w-full h-[600px] object-cover shadow-soft">
+                    <!-- Floating badge -->
+                    <div class="absolute bottom-8 left-[-20px] md:left-[-40px] bg-white p-6 shadow-xl max-w-[200px] glass interactive">
+                        <p class="font-serif text-3xl text-mocha mb-1">Top</p>
+                        <p class="text-xs uppercase tracking-widest text-rosegold">Rated Salon in G-9 Markaz</p>
+                    </div>
+                </div>
+
+                <!-- Text Side -->
+                <div class="reveal">
+                    <h2 class="font-serif text-4xl md:text-5xl text-mocha mb-6">Beauty • Confidence • Care</h2>
+                    <div class="w-16 h-1 bg-rosegold mb-8"></div>
+                    <p class="text-charcoal/80 mb-6 leading-relaxed font-light">
+                        Located in the heart of G-9 Markaz, Islamabad, <strong>Glorious by Iram Beauty Salon</strong> is a sanctuary for women seeking premium beauty care. Our philosophy is simple: every woman deserves to feel beautiful, confident, and utterly pampered.
+                    </p>
+                    <p class="text-charcoal/80 mb-8 leading-relaxed font-light">
+                        From transformative hair highlights and base colors to exquisite bridal makeovers, our professional team takes the time to understand your unique style, skin tone, and features. We don't just provide a service; we craft an experience tailored specifically to you.
+                    </p>
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center text-charcoal">
+                            <i class="fas fa-check text-rosegold mr-4"></i>
+                            <span class="font-light">Professional & Honest Consultations</span>
+                        </li>
+                        <li class="flex items-center text-charcoal">
+                            <i class="fas fa-check text-rosegold mr-4"></i>
+                            <span class="font-light">Premium Quality Products</span>
+                        </li>
+                        <li class="flex items-center text-charcoal">
+                            <i class="fas fa-check text-rosegold mr-4"></i>
+                            <span class="font-light">Experienced Beauty Specialists</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-block border-b-2 border-rosegold text-mocha uppercase tracking-widest text-sm pb-1 hover:text-rosegold transition-colors interactive">Visit Our Salon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-rosegold font-semibold tracking-widest uppercase mb-2 text-sm">Our Offerings</p>
+                <h2 class="font-serif text-4xl md:text-5xl text-mocha">Signature Services</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Service 1 -->
+                <div class="group bg-pearl rounded-2xl overflow-hidden shadow-sm hover:shadow-soft transition-all duration-500 hover:-translate-y-2 reveal interactive">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hair Styling" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-mocha/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-serif text-2xl text-mocha mb-3 group-hover:text-rosegold transition-colors">Hair Artistry</h3>
+                        <p class="text-charcoal/70 font-light text-sm mb-6 line-clamp-2">Complete hair transformations including protein wash, custom highlights, precision cuts, and flawless dye.</p>
+                        <ul class="text-xs uppercase tracking-wider text-mocha/60 space-y-2 mb-6 border-l-2 border-peach pl-3">
+                            <li>Protein Wash</li>
+                            <li>Highlights & Base Color</li>
+                            <li>Precision Haircut</li>
+                        </ul>
+                        <a href="#contact" class="text-rosegold text-sm uppercase tracking-widest font-medium flex items-center group/btn">
+                            Book Service <i class="fas fa-arrow-right ml-2 transform group-hover/btn:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group bg-pearl rounded-2xl overflow-hidden shadow-sm hover:shadow-soft transition-all duration-500 hover:-translate-y-2 reveal interactive" style="transition-delay: 100ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Makeup" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-mocha/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-serif text-2xl text-mocha mb-3 group-hover:text-rosegold transition-colors">Makeup Glamour</h3>
+                        <p class="text-charcoal/70 font-light text-sm mb-6 line-clamp-2">Enhance your features with our professional makeup services for parties, events, and special occasions.</p>
+                        <ul class="text-xs uppercase tracking-wider text-mocha/60 space-y-2 mb-6 border-l-2 border-peach pl-3">
+                            <li>Party Makeup</li>
+                            <li>Event Glamour</li>
+                            <li>Engagement Looks</li>
+                        </ul>
+                        <a href="#contact" class="text-rosegold text-sm uppercase tracking-widest font-medium flex items-center group/btn">
+                            Book Service <i class="fas fa-arrow-right ml-2 transform group-hover/btn:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group bg-pearl rounded-2xl overflow-hidden shadow-sm hover:shadow-soft transition-all duration-500 hover:-translate-y-2 reveal interactive" style="transition-delay: 200ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Skin Care" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-mocha/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-serif text-2xl text-mocha mb-3 group-hover:text-rosegold transition-colors">Skin & Essentials</h3>
+                        <p class="text-charcoal/70 font-light text-sm mb-6 line-clamp-2">Rejuvenating skin treatments, deep cleansing facials, and precise threading for a flawless glow.</p>
+                        <ul class="text-xs uppercase tracking-wider text-mocha/60 space-y-2 mb-6 border-l-2 border-peach pl-3">
+                            <li>Deep Cleansing Facial</li>
+                            <li>Skin Polishing</li>
+                            <li>Eyebrow Threading</li>
+                        </ul>
+                        <a href="#contact" class="text-rosegold text-sm uppercase tracking-widest font-medium flex items-center group/btn">
+                            Book Service <i class="fas fa-arrow-right ml-2 transform group-hover/btn:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bridal" class="py-24 bg-mocha text-pearl relative overflow-hidden">
+        <!-- Decorative bg pattern or overlay -->
+        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmY2ZiZjkiLz48L3N2Zz4=')]"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 reveal">
+                    <p class="text-rosegold font-semibold tracking-widest uppercase mb-4 text-sm">The Bridal Experience</p>
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl mb-6">Your Bridal Look,<br>Designed Around You.</h2>
+                    <p class="text-pearl/80 mb-8 leading-relaxed font-light max-w-lg">
+                        Your wedding day is your moment to shine. At Glorious by Iram, we specialize in creating breathtaking Pakistani bridal looks that blend traditional elegance with modern sophistication. 
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-10">
+                        <div class="border border-rosegold/30 p-4 text-center">
+                            <p class="font-serif text-xl mb-1">Barat</p>
+                            <p class="text-xs uppercase tracking-widest text-rosegold">Makeup</p>
+                        </div>
+                        <div class="border border-rosegold/30 p-4 text-center">
+                            <p class="font-serif text-xl mb-1">Walima</p>
+                            <p class="text-xs uppercase tracking-widest text-rosegold">Makeup</p>
+                        </div>
+                        <div class="border border-rosegold/30 p-4 text-center">
+                            <p class="font-serif text-xl mb-1">Mehndi</p>
+                            <p class="text-xs uppercase tracking-widest text-rosegold">Styling</p>
+                        </div>
+                        <div class="border border-rosegold/30 p-4 text-center">
+                            <p class="font-serif text-xl mb-1">Bridal</p>
+                            <p class="text-xs uppercase tracking-widest text-rosegold">Consultation</p>
+                        </div>
+                    </div>
+                    <a href="#contact" class="bg-rosegold text-mocha px-8 py-4 text-center hover:bg-pearl transition-colors duration-300 uppercase tracking-widest text-sm interactive inline-block">
+                        Book Bridal Consultation
+                    </a>
+                </div>
+                
+                <div class="order-1 lg:order-2 reveal img-zoom-container">
+                    <!-- Placeholder for South Asian Bridal -->
+                    <img src="https://images.unsplash.com/photo-1621095941926-2581c7e9081e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Pakistani Bridal Makeup" class="w-full h-[700px] object-cover rounded-t-full shadow-2xl border-4 border-rosegold/20">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 bg-pearl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-rosegold font-semibold tracking-widest uppercase mb-2 text-sm">Client Love</p>
+                <h2 class="font-serif text-4xl md:text-5xl text-mocha">Real Experiences</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Review 1 -->
+                <div class="bg-white p-10 rounded-2xl shadow-soft reveal interactive relative overflow-hidden">
+                    <i class="fas fa-quote-right absolute top-8 right-8 text-6xl text-peach/20"></i>
+                    <div class="flex text-rosegold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-charcoal/80 font-light italic mb-8 leading-relaxed relative z-10 text-lg">
+                        "Excellent service by the staff. Very much satisfied. I got my protein hair wash, hair cut, eye brows and hair dye. Thank you so much for the service."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-peach flex items-center justify-center text-mocha font-serif text-xl mr-4">S</div>
+                        <div>
+                            <p class="font-medium text-mocha">Samina Sajjad</p>
+                            <p class="text-xs text-charcoal/50 uppercase tracking-wider">Local Guide</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-10 rounded-2xl shadow-soft reveal interactive relative overflow-hidden" style="transition-delay: 100ms;">
+                    <i class="fas fa-quote-right absolute top-8 right-8 text-6xl text-peach/20"></i>
+                    <div class="flex text-rosegold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-charcoal/80 font-light italic mb-8 leading-relaxed relative z-10 text-lg">
+                        "Amazing services and very professional staff .. Love the experience..all member behavior is extremely nice and polite.highly recommended..."
+                    </p>
+                    <div class="flex items-center mt-auto">
+                        <div class="w-12 h-12 rounded-full bg-peach flex items-center justify-center text-mocha font-serif text-xl mr-4">M</div>
+                        <div>
+                            <p class="font-medium text-mocha">Mishi Khan</p>
+                            <p class="text-xs text-charcoal/50 uppercase tracking-wider">Happy Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-pearl rounded-3xl shadow-xl overflow-hidden flex flex-col lg:flex-row reveal border border-rosegold/10">
+                
+                <!-- Contact Info -->
+                <div class="lg:w-2/5 bg-mocha text-pearl p-10 md:p-14 relative overflow-hidden">
+                    <!-- Decorative element -->
+                    <div class="absolute -bottom-20 -left-20 w-64 h-64 border border-rosegold/20 rounded-full"></div>
+                    <div class="absolute -bottom-10 -left-10 w-64 h-64 border border-rosegold/10 rounded-full"></div>
+                    
+                    <div class="relative z-10">
+                        <h2 class="font-serif text-3xl mb-8">Contact & Location</h2>
+                        
+                        <div class="space-y-8">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1.5 mr-5 text-rosegold text-xl"></i>
+                                <div>
+                                    <p class="font-medium mb-1 uppercase tracking-wider text-xs text-rosegold">Address</p>
+                                    <p class="font-light leading-relaxed">Pehchan Mall, Glorious by Iram<br>First Floor, Shop #09<br>G-9/1, G-9 Markaz<br>Islamabad, 44000, Pakistan</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt mt-1.5 mr-5 text-rosegold text-xl"></i>
+                                <div>
+                                    <p class="font-medium mb-1 uppercase tracking-wider text-xs text-rosegold">Phone & WhatsApp</p>
+                                    <p class="font-light">+92 318 1886167</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <i class="far fa-clock mt-1.5 mr-5 text-rosegold text-xl"></i>
+                                <div>
+                                    <p class="font-medium mb-1 uppercase tracking-wider text-xs text-rosegold">Hours</p>
+                                    <p class="font-light">Mon - Sun: 11:00 AM - 9:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12">
+                            <a href="https://wa.me/923181886167" target="_blank" class="inline-flex items-center text-pearl hover:text-rosegold transition-colors interactive group border border-pearl/30 hover:border-rosegold px-6 py-3 rounded-full text-sm uppercase tracking-widest">
+                                <i class="fab fa-whatsapp text-2xl mr-3 group-hover:scale-110 transition-transform text-[#25D366]"></i> Chat on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Form -->
+                <div class="lg:w-3/5 p-10 md:p-14 relative">
+                    <h2 class="font-serif text-3xl text-mocha mb-2">Request an Appointment</h2>
+                    <p class="text-charcoal/60 font-light mb-8">Fill out the form below and we will contact you to confirm your booking.</p>
+                    
+                    <!-- Custom Success Message Box (Hidden by default) -->
+                    <div id="form-success" class="hidden mb-6 bg-[#d9a5b3]/20 border border-rosegold text-mocha px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline font-light"><i class="fas fa-check-circle mr-2"></i>Thank you! Your appointment request has been received. We will contact you shortly.</span>
+                    </div>
+
+                    <form id="booking-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-mocha/70 mb-2">Full Name</label>
+                                <input type="text" required class="w-full bg-white border-b border-mocha/20 px-0 py-3 text-charcoal focus:outline-none focus:border-rosegold transition-colors font-light placeholder-charcoal/30 interactive" placeholder="Jane Doe">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-mocha/70 mb-2">Phone / WhatsApp</label>
+                                <input type="tel" required class="w-full bg-white border-b border-mocha/20 px-0 py-3 text-charcoal focus:outline-none focus:border-rosegold transition-colors font-light placeholder-charcoal/30 interactive" placeholder="+92 3XX XXXXXXX">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-mocha/70 mb-2">Service Needed</label>
+                                <select required class="w-full bg-white border-b border-mocha/20 px-0 py-3 text-charcoal focus:outline-none focus:border-rosegold transition-colors font-light interactive appearance-none cursor-pointer">
+                                    <option value="" disabled selected>Select a service</option>
+                                    <option value="hair">Hair Styling / Color</option>
+                                    <option value="makeup">Party Makeup</option>
+                                    <option value="bridal">Bridal Makeup</option>
+                                    <option value="skin">Facial / Skin Care</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-mocha/70 mb-2">Preferred Date</label>
+                                <input type="date" required class="w-full bg-white border-b border-mocha/20 px-0 py-3 text-charcoal focus:outline-none focus:border-rosegold transition-colors font-light interactive cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-mocha/70 mb-2">Message (Optional)</label>
+                            <textarea rows="3" class="w-full bg-white border-b border-mocha/20 px-0 py-3 text-charcoal focus:outline-none focus:border-rosegold transition-colors font-light placeholder-charcoal/30 interactive resize-none" placeholder="Any special requests or details?"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full md:w-auto bg-mocha text-pearl px-10 py-4 hover:bg-rosegold transition-colors duration-300 uppercase tracking-widest text-sm shadow-soft interactive mt-4">
+                            Request Appointment
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/923181886167" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 interactive" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp text-3xl"></i>
+        <!-- Ping animation -->
+        <span class="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75 animate-ping -z-10"></span>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-pearl pt-20 pb-10 border-t border-rosegold/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <a href="#" class="font-serif text-3xl font-bold text-mocha tracking-wider mb-4 block">
+                        Glorious<span class="text-rosegold font-light text-2xl block -mt-1">by Iram</span>
+                    </a>
+                    <p class="text-charcoal/70 font-light text-sm max-w-sm mb-6 leading-relaxed">
+                        Your premium beauty destination in Islamabad. Elevating women's beauty with luxury care, professional styling, and exquisite bridal transformations.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-mocha/20 flex items-center justify-center text-mocha hover:bg-rosegold hover:text-white hover:border-transparent transition-all interactive">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-mocha/20 flex items-center justify-center text-mocha hover:bg-rosegold hover:text-white hover:border-transparent transition-all interactive">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-mocha/20 flex items-center justify-center text-mocha hover:bg-rosegold hover:text-white hover:border-transparent transition-all interactive">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-serif text-xl text-mocha mb-6">Explore</h4>
+                    <ul class="space-y-3 font-light text-sm text-charcoal/80">
+                        <li><a href="#home" class="hover:text-rosegold transition-colors interactive">Home</a></li>
+                        <li><a href="#about" class="hover:text-rosegold transition-colors interactive">Our Story</a></li>
+                        <li><a href="#services" class="hover:text-rosegold transition-colors interactive">Services</a></li>
+                        <li><a href="#bridal" class="hover:text-rosegold transition-colors interactive">Bridal Experience</a></li>
+                        <li><a href="#testimonials" class="hover:text-rosegold transition-colors interactive">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <!-- Visit -->
+                <div>
+                    <h4 class="font-serif text-xl text-mocha mb-6">Visit</h4>
+                    <ul class="space-y-3 font-light text-sm text-charcoal/80">
+                        <li>Shop #09, First Floor</li>
+                        <li>Pehchan Mall, G-9 Markaz</li>
+                        <li>Islamabad, Pakistan</li>
+                        <li class="pt-2"><a href="tel:+923181886167" class="hover:text-rosegold transition-colors interactive">+92 318 1886167</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-mocha/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-charcoal/50 uppercase tracking-widest">
+                <p>&copy; 2026 Glorious by Iram. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-rosegold transition-colors interactive">Privacy Policy</a>
+                    <a href="#" class="hover:text-rosegold transition-colors interactive">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Custom Cursor Logic ---
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            const interactives = document.querySelectorAll('.interactive, a, button, input, select, textarea');
+
+            // Only run cursor logic if not on touch device
+            if (window.matchMedia("(pointer: fine)").matches) {
+                window.addEventListener('mousemove', (e) => {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+
+                    // Update dot instantly
+                    cursorDot.style.left = `${posX}px`;
+                    cursorDot.style.top = `${posY}px`;
+
+                    // Update outline with slight delay for smooth effect
+                    cursorOutline.animate({
+                        left: `${posX}px`,
+                        top: `${posY}px`
+                    }, { duration: 500, fill: "forwards" });
+                });
+
+                // Add hover effect
+                interactives.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        document.body.classList.add('cursor-hover');
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        document.body.classList.remove('cursor-hover');
+                    });
+                });
+            }
+
+            // --- Mobile Menu Toggle ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Change icon
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+
+            // Close mobile menu on link click
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+
+            // --- Scroll Reveal Animations ---
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100; // pixels before element becomes visible
+
+                reveals.forEach(reveal => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger on load
+
+            // --- Navbar styling on scroll ---
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-soft');
+                    navbar.classList.replace('py-4', 'py-0'); // Compact slightly if padding was present
+                } else {
+                    navbar.classList.remove('shadow-soft');
+                }
+            });
+
+            // --- Form Submission Handler (Prevent Default Alert) ---
+            const bookingForm = document.getElementById('booking-form');
+            const formSuccess = document.getElementById('form-success');
+
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    // Show success message styled nicely
+                    formSuccess.classList.remove('hidden');
+                    bookingForm.reset();
+                    
+                    // Hide after 5 seconds
+                    setTimeout(() => {
+                        formSuccess.classList.add('hidden');
+                    }, 5000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
